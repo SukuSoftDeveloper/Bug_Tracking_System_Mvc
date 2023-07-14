@@ -1,0 +1,62 @@
+﻿@model BugTrackiingSystem.Models.Bug
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Issue/Bug Detail</h2>
+<hr />
+<div class="well">
+    <table class="table table-borderless table-sm">
+        <tr>
+            <th>Bug ID</th>
+            <td>@Model.BugID</td>
+        </tr>
+        <tr>
+            <th>Tracker</th>
+            <td>@Model.Tracker</td>
+        </tr>
+        <tr>
+            <th>Subject</th>
+            <td>@Model.Subject</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>@Model.Description</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>@Model.Status</td>
+        </tr>
+        <tr>
+            <th>Start Date</th>
+            <td>@Model.StartDate</td>
+        </tr>
+        <tr>
+            <th>Priority</th>
+            <td>@Model.Priority</td>
+        </tr>
+        <tr>
+            <th>Due Date</th>
+            <td>@Model.DueDate</td>
+        </tr>
+        <tr>
+            <th>Assignee</th>
+            <td>@Model.Assignee</td>
+        </tr>
+        <tr>
+            <th>Estimated Time</th>
+            <td>@Model.EstimatedTime</td>
+        </tr>
+        <tr>
+            <th>Percentage Done</th>
+            <td>@Model.PercentageDone</td>
+        </tr>
+
+    </table>
+    <br />
+    <a href="/Home/Index" class="btn btn-primary glyphicon glyphicon-chevron-left">Back To List</a>
+
+
+</div>

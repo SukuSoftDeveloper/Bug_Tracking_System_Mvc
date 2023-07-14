@@ -1,0 +1,213 @@
+﻿@model BugTrackiingSystem.Models.Bug
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style> 
+    textarea{
+        height:760px;
+    }
+</style>
+<br />
+<br />
+
+
+<form action="/Home/Update/@Model.BugID" method="post" class="well">
+    <div class="container">
+        <h2>Edit Issue</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Tracker" class="form-check-label">Tracker</label>
+                    <input type="hidden" name="BugID" value="@Model.BugID"/>
+                    <select class="form-control  " id="Tracker" name="Tracker"  data-val="true" data-val-required="This Field Can't Be Blank">
+                        @foreach (var bug in ViewBag.Bugs)
+                        {
+                            if (bug.Tracker == Model.Tracker)
+                            {
+                                <option value="@bug.Tracker" selected="selected">@bug.Tracker</option>
+                            }
+                            else
+                            {
+                                <option value="@bug.Tracker">@bug.Tracker</option>
+                            }
+
+                        }
+                    </select>
+
+
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Tracker" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="form-group">
+                    <label for="Subject">Subject</label>
+                    <input type="text" class="form-control " id="Subject" value="@Model.Subject" name="Subject" data-val="true" data-val-required="Please Enter Subject" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Subject" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="Priority">Priority</label>
+                <select class="form-control" id="Priority" name="Priority"  @*data-valmsg-for="Tracker" data-valmsg-replace="true"*@>
+                    @foreach (var bug in ViewBag.Bugs)
+                    {
+                        if (bug.Priority == Model.Priority)
+                        {
+                            <option value="@bug.Priority" selected="selected">@bug.Priority</option>
+                        }
+                        else
+                        {
+                            <option value="@bug.Priority">@bug.Priority</option>
+                        }
+
+                    }
+                </select>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Assignee">Assignee</label>
+                    <select class="form-control" id="Assignee" name="Assignee">
+                        @foreach (var bug in ViewBag.Bugs)
+                        {
+                            if (bug.Assignee == Model.Assignee)
+                            {
+                                <option value="@bug.Assignee" selected="selected">@bug.Assignee</option>
+                            }
+                            else
+                            {
+                                <option value="@bug.Assignee">@bug.Assignee</option>
+                            }
+
+                        }
+
+
+                    </select>
+                    <br />
+                    <label for="StartDate">Start Date</label>
+                    <input type="date" class="form-control" id="StartDate" name="StartDate" value="@Model.StartDate" />
+                    @*@Html.ValidationMessageFor(model => model.Assignee, "", new { @class = "text-danger" })*@
+                </div>
+
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Status">Status</label>
+                    <select class="form-control" id="Status" name="Status" @*data-valmsg-for="Tracker" data-valmsg-replace="true"*@>
+                        @foreach (var bug in ViewBag.Bugs)
+                        {
+                            if (bug.Status == Model.Status)
+                            {
+                                <option value="@bug.Status" selected="selected">@bug.Status</option>
+                            }
+                            else
+                            {
+                                <option value="@bug.Status">@bug.Status</option>
+                            }
+
+                        }
+
+                    </select>
+
+                    @*<span class="field-validation-valid text-danger" data-valmsg-for="Status" data-valmsg-replace="true"></span>*@
+                    <br />
+                    <label for="DueDate">Due Date</label>
+                    <input type="date" class="form-control" id="DueDate"  name="DueDate" @*data-valmsg-for="Tracker" data-valmsg-replace="true"*@ />
+                    @*<span class="field-validation-valid text-danger" data-valmsg-for="DueDate" data-valmsg-replace="true"></span>*@
+                    @*@foreach (var bug in ViewBag.Bugs)
+                    {
+                        if (bug.DueDate == Model.DueDate)
+                        {
+                            <option value="@bug.DueDate" selected="selected">@bug.DueDate</option>
+                        }
+                        else
+                        {
+                            <option value="@bug.DueDate">@bug.DueDate</option>
+                        }
+
+                    }*@
+                </div>
+
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <label for="Description">Description</label>
+                    <textarea cols="300" rows="5" class="form-control" value="@Model.Description" id="Description" name="Description" data-val="true" data-val-required="Please Enter Description" Width="90%"></textarea>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Subject" data-valmsg-replace="true"></span>
+                    @*<span class="field-validation-valid text-danger" data-valmsg-for="Priority" data-valmsg-replace="true"></span>*@
+                    @*<span class="field-validation-valid text-danger" data-valmsg-for="Status" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="EstimatedTime">Estimated Time</label>
+                    <input type="text" class="form-control" placeholder="Hours" id="EstimatedTime" name="EstimatedTime" value="@Model.EstimatedTime" />
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="PercentageDone">Percentage Done</label>
+                    <select class="form-control" id="PercentageDone" name="PercentageDone" >
+                        @foreach (var bug in ViewBag.Bugs)
+                        {
+                            if (bug.PercentageDone == Model.PercentageDone)
+                            {
+                                <option value="@bug.PercentageDone" selected="selected">@bug.PercentageDone</option>
+                            }
+                            else
+                            {
+                                <option value="@bug.PercentageDone">@bug.PercentageDone</option>
+                            }
+
+                        }
+
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/Home/Index" class="btn btn-success">Back to Index</a>
+                </div>
+            </div>
+        </div>
+
+       
+
+  
+
+
+    </div>
+</form>
+
+
+@*////Validation Purpose iam imported this packages////*@
+
+@*@section Validation{*@
+<!--<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}-->

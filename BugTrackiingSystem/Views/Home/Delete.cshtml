@@ -1,0 +1,40 @@
+﻿@model BugTrackiingSystem.Models.Bug
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Issue</h2>
+
+<hr />
+<div class="row well">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <form action="/Home/Delete/@Model.BugID" method="post">
+            <div class="container">
+                <div class="form-group ">
+                    <label>Tracker</label>
+                    <input type="hidden" name="BugID" value="@Model.BugID" />
+                    <select class="form-control  " id="Tracker" name="Tracker" value="@Model.Tracker">
+                        <option value="@Model.Tracker">Bug</option>
+                        <option value="@Model.Tracker">Issue</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Subject">Subject</label>
+                    <input type="text" class="form-control" id="Subject" name="Subject" value="@Model.Subject" />
+
+                </div>
+             </div>
+               &nbsp;&nbsp;&nbsp;  <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="/Home/Index" class="btn btn-info">Back To List</a>
+              </div>
+       </form>
+    </div>
+
+</div>
+
+

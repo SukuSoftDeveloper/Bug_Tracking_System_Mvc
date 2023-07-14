@@ -1,0 +1,123 @@
+﻿@model  List<BugTrackiingSystem.Models.Bug>
+@using BugTrackiingSystem.CustomHtmlHelpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Issue Summary</h2>
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success show ">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>Success !</strong> @TempData["msg"]
+
+    </div>       
+
+}
+<hr />
+<div class="form-row">
+    <div class="col-md-6">
+        <form action="/Home/Index" class="form-inline">
+            <label class="search">Search:</label>
+            <input  type="search" class="form-control" id="search" name="search" placeholder="Search By BugID" value="@ViewBag.search"/>
+            <button type="submit" class="btn btn-primary">Go</button>
+            <a href="/Home/Index" class="btn btn-success">Clear</a>
+        </form>
+    </div>
+    <div class="col-md-6 text-right">
+        @*<a href="/Home/Create" class="btn btn-primary glyphicon glyphicon-plus"> CreateNewIssue</a>*@
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Create New", "Create", "Home", new { @class = "btn btn-primary glyphicon glyphicon-plus " }).Show(User.IsInRole("Admin"))
+            }
+            else if (User.IsInRole("Lead"))
+            {
+                @Html.ActionLink("Create New", "Create", "Home", new { @class = "btn btn-primary glyphicon glyphicon-plus " }).Show(User.IsInRole("Lead"))
+            }
+        }
+
+    </div>
+</div>
+<br />
+<br />
+
+<div class="well">
+    <table class="table table-hover  ">
+        <thead class=" bg-primary">
+            <tr>
+                <th>Bug ID</th>
+                <th>Tracker</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>StartDate</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Assignee</th>
+                <th>Estimated Time</th>
+                <th>Percentage Done</th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+               <h3><td colspan="3" style="color:blue">No Records Found!</td></h3> 
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tbody class="bg-info">
+                    <tr>
+                        <td>@item.BugID</td>
+                        <td>@item.Tracker</td>
+                        <td>@item.Subject</td>
+                        <td>@item.Description</td>
+                        <td>@item.Status</td>
+                        <td>@item.StartDate</td>
+                        <td>@item.Priority</td>
+                        <td>@item.DueDate</td>
+                        <td>@item.Assignee</td>
+                        <td>@item.EstimatedTime</td>
+                        <td>@item.PercentageDone</td>
+                        <td>
+                            <a href="/Home/Detail/@item.BugID" class="btn btn-primary btn-sm glyphicon glyphicon-pencil">Details</a>
+                        </td>
+                        <td>
+                            <a href="/Home/Update/@item.BugID" class="btn btn-success btn-sm glyphicon glyphicon-edit">Edit</a>
+                        </td>
+                        <td>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole("Admin"))
+                                {
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.BugID, controller = "Home" }, new { @class = "btn btn-danger" }).Show(User.IsInRole("Admin"))
+                                }
+                                else if (User.IsInRole("Lead"))
+                                {
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.BugID, controller = "Home" }, new { @class = "btn btn-danger" }).Show(User.IsInRole("Lead"))
+                                }
+                            }
+
+
+                            @*<a href="/Home/Delete/@item.BugID" class="btn btn-danger btn-sm glyphicon glyphicon-trash">Delete</a>*@
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        }
+
+
+    </table>
+
+
+</div>

@@ -1,0 +1,59 @@
+﻿@model  BugTrackiingSystem.Models.Bug
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<hr />
+<table>
+    <tr>
+        <th>Bug ID</th>
+        <td>@Model.BugID</td>
+    </tr>
+    <tr>
+        <th>Tracker</th>
+        <td>@Model.Tracker</td>
+    </tr>
+    <tr>
+        <th>Subject</th>
+        <td>@Model.Subject</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>@Model.Status</td>
+    </tr>
+    <tr>
+        <th>Start Date</th>
+        <td>@Model.StartDate</td>
+    </tr>
+    <tr>
+        <th>Priority</th>
+        <td>@Model.Priority</td>
+    </tr>
+    <tr>
+        <th>Due Date</th>
+        <td>@Model.DueDate</td>
+    </tr>
+    <tr>
+        <th>Assignee</th>
+        <td>@Model.Assignee</td>
+    </tr>
+    <tr>
+        <th>Estimated Time</th>
+        <td>@Model.EstimatedTime</td>
+    </tr>
+    <tr>
+        <th>Percentage Done</th>
+        <td>@Model.PercentageDone</td>
+    </tr>
+    
+</table>
+<br />
+
+
